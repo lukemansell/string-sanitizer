@@ -3,7 +3,7 @@
 public enum SanitiseSpaces
 {
     /// <summary>
-    /// Removes spaces. Enabled by default.
+    /// Removes spaces. Enabled by default
     /// </summary>
     True,
     /// <summary>

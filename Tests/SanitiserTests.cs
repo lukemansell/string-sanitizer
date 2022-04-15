@@ -108,6 +108,34 @@ public class SanitiserTests
     }
     
     [Theory]
+    [InlineData("Hello world13", "Hello world")]
+    [InlineData("Hello-world14", "Helloworld")]
+    [InlineData("Hello 10 worlds", "Hello  worlds")]
+    public void NumericAreSanitisedFromString(string input, string expected)
+    {
+        // Arrange
+        
+        // Act
+        var result = input.SanitiseNumeric(SanitiseSpaces.False);
+        // Assert
+        result.Should().BeEquivalentTo(expected);
+    }
+    
+    [Theory]
+    [InlineData("Hello world13", "Helloworld")]
+    [InlineData("Hello-world14", "Helloworld")]
+    [InlineData("Hello 10 worlds", "Helloworlds")]
+    public void NumericAndSpacesAreSanitisedFromString(string input, string expected)
+    {
+        // Arrange
+        
+        // Act
+        var result = input.SanitiseNumeric();
+        // Assert
+        result.Should().BeEquivalentTo(expected);
+    }
+    
+    [Theory]
     [InlineData(" Hello❤", "Hello")]
     [InlineData("❤Hello", "Hello")]
     [InlineData("Hello ❤", "Hello ")]

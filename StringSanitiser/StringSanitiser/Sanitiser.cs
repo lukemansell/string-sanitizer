@@ -25,10 +25,18 @@ public static class Sanitiser
             "");
     }
     
+    /// <summary>
+    /// Removes any line breaks which occur in a string.
+    /// </summary>
+    /// <param name="input">The string which you wish to run through the sanitiser</param>
+    /// <returns></returns>
     public static string SanitiseLinebreaks(
         this string input)
     {
-        return "hi";
+        return Regex.Replace(
+            input,
+            @"\r\n?|\n",
+            "");
     }
     
     /// <summary>
@@ -73,11 +81,39 @@ public static class Sanitiser
         return !string.IsNullOrEmpty(input) && char.IsWhiteSpace(input[0]) ? input.Remove(0, 1) : input;
     }
 
+    /// <summary>
+    /// Removes any non alphanumeric (A-Z, a-z, 0-9) characters from a string. Optional parameter to sanitise spaces as
+    /// well - this is turned on by default.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="sanitiseSpaces">Sanitises spaces. Use the <see cref="SanitiseSpaces"/>SanitiseSpaces</param> enum
+    /// set to false to not remove spaces.
+    /// <returns></returns>
     public static string SanitiseNonAlphanumeric(
         this string input,
         SanitiseSpaces sanitiseSpaces = SanitiseSpaces.True)
     {
         var pattern = sanitiseSpaces == SanitiseSpaces.True ? @"[^a-zA-Z0-9]" : @"[^a-zA-Z0-9 ]";
+        
+        return Regex.Replace(
+            input,
+            pattern,
+            "");
+    }
+    
+    /// <summary>
+    /// Removes any numeric characters (0-9) characters from a string. Optional parameter to sanitise spaces as
+    /// well - this is turned on by default.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="sanitiseSpaces">Sanitises spaces. Use the <see cref="SanitiseSpaces"/>SanitiseSpaces</param> enum
+    /// set to false to not remove spaces.
+    /// <returns></returns>
+    public static string SanitiseNumeric(
+        this string input,
+        SanitiseSpaces sanitiseSpaces = SanitiseSpaces.True)
+    {
+        var pattern = sanitiseSpaces == SanitiseSpaces.True ? @"[^a-zA-Z]" : @"[^a-zA-Z ]";
         
         return Regex.Replace(
             input,

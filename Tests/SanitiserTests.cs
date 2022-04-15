@@ -1,5 +1,6 @@
 using FluentAssertions;
 using StringSanitiser.StringSanitiser;
+using StringSanitiser.StringSanitiser.Enums;
 using Xunit;
 
 namespace Tests;
@@ -74,6 +75,34 @@ public class SanitiserTests
         
         // Act
         var result = input.SanitiseUrls();
+        // Assert
+        result.Should().BeEquivalentTo(expected);
+    }
+    
+    [Theory]
+    [InlineData("Hello world", "Hello world")]
+    [InlineData("Hello-world", "Helloworld")]
+    [InlineData("Hello 10 worlds", "Hello 10 worlds")]
+    public void NonAlphanumericAreSanitisedFromString(string input, string expected)
+    {
+        // Arrange
+        
+        // Act
+        var result = input.SanitiseNonAlphanumeric(SanitiseSpaces.False);
+        // Assert
+        result.Should().BeEquivalentTo(expected);
+    }
+    
+    [Theory]
+    [InlineData("Hello world", "Helloworld")]
+    [InlineData("Hello-world", "Helloworld")]
+    [InlineData("Hello 10 worlds", "Hello10worlds")]
+    public void NonAlphanumericAndSpacesAreSanitisedFromString(string input, string expected)
+    {
+        // Arrange
+        
+        // Act
+        var result = input.SanitiseNonAlphanumeric();
         // Assert
         result.Should().BeEquivalentTo(expected);
     }

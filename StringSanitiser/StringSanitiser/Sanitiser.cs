@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using StringSanitiser.StringSanitiser.Enums;
 
 namespace StringSanitiser.StringSanitiser;
 
@@ -30,10 +31,16 @@ public static class Sanitiser
         return "hi";
     }
     
+    /// <summary>
+    /// Sanitises URLs from an input string.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
     public static string SanitiseUrls(
         this string input)
     {
-        const string urlRegex = @"((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)";
+        const string urlRegex =
+            @"((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)";
 
         return Regex.Replace(input,
             urlRegex,
@@ -64,6 +71,18 @@ public static class Sanitiser
         this string input)
     {
         return !string.IsNullOrEmpty(input) && char.IsWhiteSpace(input[0]) ? input.Remove(0, 1) : input;
+    }
+
+    public static string SanitiseNonAlphanumeric(
+        this string input,
+        SanitiseSpaces sanitiseSpaces = SanitiseSpaces.True)
+    {
+        var pattern = sanitiseSpaces == SanitiseSpaces.True ? @"[^a-zA-Z0-9]" : @"[^a-zA-Z0-9 ]";
+        
+        return Regex.Replace(
+            input,
+            pattern,
+            "");
     }
     
     /// <summary>

@@ -1,6 +1,6 @@
-﻿namespace StringSanitiser.StringSanitiser.Enums;
+﻿namespace StringSanitizer.StringSanitizer.Enums;
 
-public enum SanitiseSpaces
+public enum SanitizeSpaces
 {
     /// <summary>
     /// Removes spaces. Enabled by default

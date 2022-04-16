@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringSanitiser", "StringSanitiser\StringSanitiser.csproj", "{C4592F01-28B8-4F26-869C-B53F9F8007F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringSanitizer", "StringSanitizer\StringSanitizer.csproj", "{C4592F01-28B8-4F26-869C-B53F9F8007F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{C8AD67FB-9956-49B5-86EB-F716E292EC61}"
 EndProject

@@ -1,23 +1,23 @@
 using FluentAssertions;
-using StringSanitiser.StringSanitiser;
-using StringSanitiser.StringSanitiser.Enums;
+using StringSanitizer.StringSanitizer;
+using StringSanitizer.StringSanitizer.Enums;
 using Xunit;
 
 namespace Tests;
 
-public class SanitiserTests
+public class SanitizerTests
 {
     [Theory]
     [InlineData("❤", "")]
     [InlineData("❤❤!", "!")]
     [InlineData("🙌🏽", "")]
     [InlineData("Hello world!", "Hello world!")]
-    public void EmojisAreSanitisedFromString(string input, string expected)
+    public void EmojisAreSanitizedFromString(string input, string expected)
     {
         // Arrange
         
         // Act
-        var result = input.SanitiseEmojis();
+        var result = input.SanitizeEmojis();
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
@@ -26,12 +26,12 @@ public class SanitiserTests
     [InlineData(" Hello", "Hello")]
     [InlineData("Hello", "Hello")]
     [InlineData("Hello ", "Hello ")]
-    public void LeadingWhiteSpaceAreSanitisedFromString(string input, string expected)
+    public void LeadingWhiteSpaceAreSanitizedFromString(string input, string expected)
     {
         // Arrange
         
         // Act
-        var result = input.SanitiseLeadingEmptyCharacter();
+        var result = input.SanitizeLeadingEmptyCharacter();
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
@@ -39,12 +39,12 @@ public class SanitiserTests
     [Theory]
     [InlineData("Hello ", "Hello")]
     [InlineData(" Hello ", " Hello")]
-    public void EndingWhiteSpaceAreSanitisedFromString(string input, string expected)
+    public void EndingWhiteSpaceAreSanitizedFromString(string input, string expected)
     {
         // Arrange
         
         // Act
-        var result = input.SanitiseEndingEmptyCharacter();
+        var result = input.SanitizeEndingEmptyCharacter();
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
@@ -55,12 +55,12 @@ public class SanitiserTests
     [InlineData("Hello      world", "Hello world")]
     [InlineData("  Hello world", " Hello world")]
     [InlineData("Hello world", "Hello world")]
-    public void ExcessiveSpacesAreSanitisedFromString(string input, string expected)
+    public void ExcessiveSpacesAreSanitizedFromString(string input, string expected)
     {
         // Arrange
         
         // Act
-        var result = input.SanitiseExcessiveSpaces();
+        var result = input.SanitizeExcessiveSpaces();
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
@@ -69,12 +69,12 @@ public class SanitiserTests
     [InlineData("hello I am a spammer https://google.com", "hello I am a spammer ")]
     [InlineData("https://google.com/index", "")]
     [InlineData("HTTPS://GOOGLE.COM", "")]
-    public void UrlsAreSanitisedFromString(string input, string expected)
+    public void UrlsAreSanitizedFromString(string input, string expected)
     {
         // Arrange
         
         // Act
-        var result = input.SanitiseUrls();
+        var result = input.SanitizeUrls();
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
@@ -83,12 +83,12 @@ public class SanitiserTests
     [InlineData("Hello world", "Hello world")]
     [InlineData("Hello-world", "Helloworld")]
     [InlineData("Hello 10 worlds", "Hello 10 worlds")]
-    public void NonAlphanumericAreSanitisedFromString(string input, string expected)
+    public void NonAlphanumericAreSanitizedFromString(string input, string expected)
     {
         // Arrange
         
         // Act
-        var result = input.SanitiseNonAlphanumeric(SanitiseSpaces.False);
+        var result = input.SanitizeNonAlphanumeric(SanitizeSpaces.False);
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
@@ -97,12 +97,12 @@ public class SanitiserTests
     [InlineData("Hello world", "Helloworld")]
     [InlineData("Hello-world", "Helloworld")]
     [InlineData("Hello 10 worlds", "Hello10worlds")]
-    public void NonAlphanumericAndSpacesAreSanitisedFromString(string input, string expected)
+    public void NonAlphanumericAndSpacesAreSanitizedFromString(string input, string expected)
     {
         // Arrange
         
         // Act
-        var result = input.SanitiseNonAlphanumeric();
+        var result = input.SanitizeNonAlphanumeric();
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
@@ -111,12 +111,12 @@ public class SanitiserTests
     [InlineData("Hello world13", "Hello world")]
     [InlineData("Hello-world14", "Helloworld")]
     [InlineData("Hello 10 worlds", "Hello  worlds")]
-    public void NumericAreSanitisedFromString(string input, string expected)
+    public void NumericAreSanitizedFromString(string input, string expected)
     {
         // Arrange
         
         // Act
-        var result = input.SanitiseNumeric(SanitiseSpaces.False);
+        var result = input.SanitizeNumeric(SanitizeSpaces.False);
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
@@ -125,12 +125,12 @@ public class SanitiserTests
     [InlineData("Hello world13", "Helloworld")]
     [InlineData("Hello-world14", "Helloworld")]
     [InlineData("Hello 10 worlds", "Helloworlds")]
-    public void NumericAndSpacesAreSanitisedFromString(string input, string expected)
+    public void NumericAndSpacesAreSanitizedFromString(string input, string expected)
     {
         // Arrange
         
         // Act
-        var result = input.SanitiseNumeric();
+        var result = input.SanitizeNumeric();
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
@@ -139,12 +139,12 @@ public class SanitiserTests
     [InlineData(" Hello❤", "Hello")]
     [InlineData("❤Hello", "Hello")]
     [InlineData("Hello ❤", "Hello ")]
-    public void AllSanitiseFeaturesCanBeStacked(string input, string expected)
+    public void AllSanitizeFeaturesCanBeStacked(string input, string expected)
     {
         // Arrange
         
         // Act
-        var result = input.SanitiseLeadingEmptyCharacter().SanitiseEmojis();
+        var result = input.SanitizeLeadingEmptyCharacter().SanitizeEmojis();
         // Assert
         result.Should().BeEquivalentTo(expected);
     }

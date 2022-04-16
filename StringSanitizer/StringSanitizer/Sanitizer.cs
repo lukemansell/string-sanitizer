@@ -1,20 +1,20 @@
 ﻿using System.Text.RegularExpressions;
-using StringSanitiser.StringSanitiser.Enums;
+using StringSanitizer.StringSanitizer.Enums;
 
-namespace StringSanitiser.StringSanitiser;
+namespace StringSanitizer.StringSanitizer;
 
 /// <summary>
 /// This contains the extension methods for sanitising strings
 /// </summary>
-public static class Sanitiser
+public static class Sanitizer
 {
     /// <summary>
     /// This removes all emojis provided the input string, replacing them with nothing. This will remove a single or
     /// multiple occurrence.
     /// </summary>
-    /// <param name="input">The string which you wish to run through the sanitiser</param>
+    /// <param name="input">The string which you wish to run through the sanitizer</param>
     /// <returns></returns>
-    public static string SanitiseEmojis(
+    public static string SanitizeEmojis(
         this string input)
     {
         const string emojiRegex =
@@ -28,9 +28,9 @@ public static class Sanitiser
     /// <summary>
     /// Removes any line breaks which occur in a string.
     /// </summary>
-    /// <param name="input">The string which you wish to run through the sanitiser</param>
+    /// <param name="input">The string which you wish to run through the sanitizer</param>
     /// <returns></returns>
-    public static string SanitiseLinebreaks(
+    public static string SanitizeLinebreaks(
         this string input)
     {
         return Regex.Replace(
@@ -40,11 +40,11 @@ public static class Sanitiser
     }
     
     /// <summary>
-    /// Sanitises URLs from an input string.
+    /// Sanitizes URLs from an input string.
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public static string SanitiseUrls(
+    public static string SanitizeUrls(
         this string input)
     {
         const string urlRegex =
@@ -56,13 +56,13 @@ public static class Sanitiser
     }
     
     /// <summary>
-    /// Sanitises multiple occurrences of spaces. Eg: Hello    World is turned into Hello World. Excessive spaces at the
+    /// Sanitizes multiple occurrences of spaces. Eg: Hello    World is turned into Hello World. Excessive spaces at the
     /// start of a string will be turned into one space. To remove the leading space, use
-    /// <code>string.SanitiseExcessiveSpaces().SanitiseLeadingEmptyCharacter()</code>
+    /// <code>string.SanitizeExcessiveSpaces().SanitizeLeadingEmptyCharacter()</code>
     /// </summary>
-    /// <param name="input">The string which you wish to run through the sanitiser</param>
+    /// <param name="input">The string which you wish to run through the sanitizer</param>
     /// <returns></returns>
-    public static string SanitiseExcessiveSpaces(
+    public static string SanitizeExcessiveSpaces(
         this string input)
     {
         return Regex.Replace(input, @"\s+", " ");
@@ -70,30 +70,30 @@ public static class Sanitiser
     
     /// <summary>
     /// Removes the first character of an inputted string if the first character is a whitespace character. Multiple
-    /// leading spaces won't be sanitised, just the first. To remove multiple leading spaces, use
-    /// <code>string.SanitiseExcessiveSpaces().SanitiseLeadingEmptyCharacter()</code>
+    /// leading spaces won't be sanitized, just the first. To remove multiple leading spaces, use
+    /// <code>string.SanitizeExcessiveSpaces().SanitizeLeadingEmptyCharacter()</code>
     /// </summary>
-    /// <param name="input">The string which you wish to run through the sanitiser</param>
+    /// <param name="input">The string which you wish to run through the sanitizer</param>
     /// <returns></returns>
-    public static string SanitiseLeadingEmptyCharacter(
+    public static string SanitizeLeadingEmptyCharacter(
         this string input)
     {
         return !string.IsNullOrEmpty(input) && char.IsWhiteSpace(input[0]) ? input.Remove(0, 1) : input;
     }
 
     /// <summary>
-    /// Removes any non alphanumeric (A-Z, a-z, 0-9) characters from a string. Optional parameter to sanitise spaces as
+    /// Removes any non alphanumeric (A-Z, a-z, 0-9) characters from a string. Optional parameter to sanitize spaces as
     /// well - this is turned on by default.
     /// </summary>
     /// <param name="input"></param>
-    /// <param name="sanitiseSpaces">Sanitises spaces. Use the <see cref="SanitiseSpaces"/>SanitiseSpaces</param> enum
+    /// <param name="sanitizeSpaces">Sanitizes spaces. Use the <see cref="SanitizeSpaces"/>SanitizeSpaces</param> enum
     /// set to false to not remove spaces.
     /// <returns></returns>
-    public static string SanitiseNonAlphanumeric(
+    public static string SanitizeNonAlphanumeric(
         this string input,
-        SanitiseSpaces sanitiseSpaces = SanitiseSpaces.True)
+        SanitizeSpaces sanitizeSpaces = SanitizeSpaces.True)
     {
-        var pattern = sanitiseSpaces == SanitiseSpaces.True ? @"[^a-zA-Z0-9]" : @"[^a-zA-Z0-9 ]";
+        var pattern = sanitizeSpaces == SanitizeSpaces.True ? @"[^a-zA-Z0-9]" : @"[^a-zA-Z0-9 ]";
         
         return Regex.Replace(
             input,
@@ -102,18 +102,18 @@ public static class Sanitiser
     }
     
     /// <summary>
-    /// Removes any numeric characters (0-9) characters from a string. Optional parameter to sanitise spaces as
+    /// Removes any numeric characters (0-9) characters from a string. Optional parameter to sanitize spaces as
     /// well - this is turned on by default.
     /// </summary>
     /// <param name="input"></param>
-    /// <param name="sanitiseSpaces">Sanitises spaces. Use the <see cref="SanitiseSpaces"/>SanitiseSpaces</param> enum
+    /// <param name="sanitizeSpaces">Sanitizes spaces. Use the <see cref="SanitizeSpaces"/>SanitizeSpaces</param> enum
     /// set to false to not remove spaces.
     /// <returns></returns>
-    public static string SanitiseNumeric(
+    public static string SanitizeNumeric(
         this string input,
-        SanitiseSpaces sanitiseSpaces = SanitiseSpaces.True)
+        SanitizeSpaces sanitizeSpaces = SanitizeSpaces.True)
     {
-        var pattern = sanitiseSpaces == SanitiseSpaces.True ? @"[^a-zA-Z]" : @"[^a-zA-Z ]";
+        var pattern = sanitizeSpaces == SanitizeSpaces.True ? @"[^a-zA-Z]" : @"[^a-zA-Z ]";
         
         return Regex.Replace(
             input,
@@ -123,12 +123,12 @@ public static class Sanitiser
     
     /// <summary>
     /// Removes the ending character of an inputted string if the ending character is a whitespace character. Multiple
-    /// ending spaces won't be sanitised, just the one. To remove multiple ending spaces, use
-    /// <code>string.SanitiseExcessiveSpaces().SanitiseLeadingEmptyCharacter()</code>
+    /// ending spaces won't be sanitized, just the one. To remove multiple ending spaces, use
+    /// <code>string.SanitizeExcessiveSpaces().SanitizeLeadingEmptyCharacter()</code>
     /// </summary>
-    /// <param name="input">The string which you wish to run through the sanitiser</param>
+    /// <param name="input">The string which you wish to run through the sanitizer</param>
     /// <returns></returns>
-    public static string SanitiseEndingEmptyCharacter(
+    public static string SanitizeEndingEmptyCharacter(
         this string input)
     {
         var lastCharacterCount = input.Length - 1;

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>String Sanitizer</Title>
+        <Version>1.0.0</Version>
+        <Authors>Luke Mansell</Authors>
+        <Description>Common methods to easily sanitize specific things from strings, such as spaces, emojis, links and more.</Description>
+        <Copyright>Copyright (c) Luke Mansell // Stax Ventures</Copyright>
+        <PackageProjectUrl>https://github.com/lukemansell/string-sanitizer.git</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/lukemansell/string-sanitizer.git</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <Company>Pixelstax</Company>
+        <PackageTags>string, sanitizer, sanitizer, string scrubber, scrubber</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageId>StringSanitizer</PackageId>
+    </PropertyGroup>
+
+</Project>

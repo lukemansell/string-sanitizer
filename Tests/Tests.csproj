@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\StringSanitiser\StringSanitiser.csproj" />
+      <ProjectReference Include="..\StringSanitizer\StringSanitizer.csproj" />
     </ItemGroup>
 
 </Project>

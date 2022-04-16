@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using FluentAssertions;
 using StringSanitizer.StringSanitizer;
 using StringSanitizer.StringSanitizer.Enums;
@@ -131,6 +132,24 @@ public class SanitizerTests
         
         // Act
         var result = input.SanitizeNumeric();
+        // Assert
+        result.Should().BeEquivalentTo(expected);
+    }
+    
+    
+    [Theory]
+    [InlineData("5555555555554444", "")]
+    [InlineData("5105105105105100", "")]
+    [InlineData("4111111111111111", "")]
+    [InlineData("4111-1111-1111-1111", "")]
+    [InlineData("90210", "90210")]
+    [InlineData("4111-1111-1111 hah prank", "4111-1111-1111 hah prank")]
+    public void CreditCardsAreSanitizedFromString(string input, string expected)
+    {
+        // Arrange
+        
+        // Act
+        var result = input.SanitizeCreditCard();
         // Assert
         result.Should().BeEquivalentTo(expected);
     }

@@ -135,4 +135,21 @@ public static class Sanitizer
         var lastCharacterCount = input.Length - 1;
         return !string.IsNullOrEmpty(input) && char.IsWhiteSpace(input[lastCharacterCount]) ? input.Remove(lastCharacterCount, 1) : input;
     }
+    
+    /// <summary>
+    /// Sanitizes credit cards. Important for PCI compliance. Strips out credit cards such as 4111-1111-1111-1111 and
+    /// 5555555555554444.
+    /// </summary>
+    /// <param name="input">The string which you wish to run through the sanitizer</param>
+    /// <returns></returns>
+    public static string SanitizeCreditCard(
+        this string input)
+    {
+        const string pattern = 
+            @"4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11}|^[1-9][0-9]{3}-[1-3]{4}-[0-9]{4}-[0-9]{4}$";
+        return Regex.Replace(
+            input,
+            pattern,
+            "");
+    }
 }

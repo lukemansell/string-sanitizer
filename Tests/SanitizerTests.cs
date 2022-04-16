@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using FluentAssertions;
 using StringSanitizer.StringSanitizer;
 using StringSanitizer.StringSanitizer.Enums;
@@ -46,6 +45,21 @@ public class SanitizerTests
         
         // Act
         var result = input.SanitizeEndingEmptyCharacter();
+        // Assert
+        result.Should().BeEquivalentTo(expected);
+    }
+    
+    [Theory]
+    [InlineData(@"Hello 
+there", "Hello there")]
+    [InlineData(@"Hello
+there", "Hellothere")]
+    public void LineBreaksAreSanitizedFromString(string input, string expected)
+    {
+        // Arrange
+        
+        // Act
+        var result = input.SanitizeLinebreaks();
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
@@ -158,7 +172,7 @@ public class SanitizerTests
     [InlineData(" Hello❤", "Hello")]
     [InlineData("❤Hello", "Hello")]
     [InlineData("Hello ❤", "Hello ")]
-    public void AllSanitizeFeaturesCanBeStacked(string input, string expected)
+    public void SanitizeFeaturesCanBeStacked(string input, string expected)
     {
         // Arrange
         

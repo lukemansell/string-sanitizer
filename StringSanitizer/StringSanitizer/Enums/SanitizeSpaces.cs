@@ -6,6 +6,7 @@ public enum SanitizeSpaces
     /// Removes spaces. Enabled by default
     /// </summary>
     True,
+
     /// <summary>
     /// Does not remove spaces
     /// </summary>

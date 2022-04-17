@@ -1,6 +1,6 @@
 # String Sanitizer
 
-This NuGet library contains extension methods to Sanitize common issues with strings, removing the complexity to implement or use Regex to solve common issues.
+This [NuGet library](https://www.nuget.org/packages/Stax.StringSanitizer/) contains extension methods to Sanitize common issues with strings, removing the complexity to implement or use Regex to solve common issues.
 
 ### Features
 

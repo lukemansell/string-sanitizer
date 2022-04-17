@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net45;netstandard1.3;netstandard2.0;netstandard2.1;net5.0;net6.0</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <LangVersion>10</LangVersion>
+        <Title>String Sanitizer</Title>
+        <Version>1.0.0</Version>
+        <Authors>Luke Mansell</Authors>
+        <Description>Common methods to easily sanitize specific things from strings, such as excessive spaces, emojis, links, leading/ending whitespace characters and more.</Description>
+        <Copyright>Copyright (c) Luke Mansell // Stax Ventures</Copyright>
+        <PackageProjectUrl>https://github.com/lukemansell/string-sanitizer.git</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/lukemansell/string-sanitizer.git</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <Company>Pixelstax</Company>
+        <PackageTags>string;sanitizer;sanitizer;string scrubber;scrubber;credit card;emoji;regex</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageId>Stax.StringSanitizer</PackageId>
+        <PackageReleaseNotes>Initial release. Adds the features:
+
+* Remove emojis from a string
+* Remove linebreaks from a string
+* Remove URLs from a string
+* Remove excessive spaces from a string (more than one occurrence of a space)
+* Remove leading character if it is empty
+* Remove ending character if it is empty
+* Remove any non alphanumeric characters (with the option to disable/enable removing whitespaces too)
+* Remove any numeric characters from a string (with the option to disable/enable removing whitespaces too)
+* Remove credit cards from a string
+        </PackageReleaseNotes>
+    </PropertyGroup>
+
+</Project>

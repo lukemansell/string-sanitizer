@@ -1,5 +1,8 @@
 # String Sanitizer
 
+[![Version](https://img.shields.io/nuget/vpre/stax.stringsanitizer.svg)](https://www.nuget.org/packages/stax.stringsanitizer)
+[![Downloads](https://img.shields.io/nuget/dt/stax.stringsanitizer.svg)](https://www.nuget.org/packages/stax.stringsanitizer)
+
 This [NuGet library](https://www.nuget.org/packages/Stax.StringSanitizer/) contains extension methods to Sanitize common issues with strings, removing the complexity to implement or use Regex to solve common issues.
 
 ### Features
